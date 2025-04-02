@@ -1,15 +1,17 @@
 import { useState } from "react";
-import FlightForm from "./components/FlightForm";
-import ResultCard from "./components/ResultCard";
+import Navbar from "./components/Navbar";
+import Home from "./pages/Home";
+import Services from "./pages/Services";
+import About from "./pages/About";
 
 const App = () => {
-    const [result, setResult] = useState(null);
 
     return (
-        <div className="min-h-screen flex flex-col items-center p-6">
-            <h1 className="text-2xl font-bold">Flight Delay Predictor</h1>
-            <FlightForm setResult={setResult} />
-            {result && <ResultCard result={result} />}
+        <div >
+            <Navbar />
+            <Home/>
+            <About/>
+            <Services/>
         </div>
     );
 };
