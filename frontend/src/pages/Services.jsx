@@ -10,7 +10,7 @@ const Services = () => {
 			id="services"
 			className="min-h-screen flex flex-col items-center pt-20 md:pt-25 px-4 md:px-10 bg-gray-100"
 		>
-			<h1 className="text-4xl font-bold mb-6">Flight Delay Predictor</h1>
+			<h1 className="text-4xl font-bold mb-6 text-center">Flight Delay Predictor</h1>
 			<div className="w-full flex flex-col md:flex-row md:justify-center md:gap-10">
 				{/* FlightForm on the left */}
 				<div className="w-full md:w-1/2">
