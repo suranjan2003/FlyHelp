@@ -4,7 +4,7 @@ const About = () => {
 	return (
 		<div
 			id="about"
-			className="min-h-[60vh] bg-blue-900 text-white py-20 px-10 md:px-20"
+			className="min-h-[60vh] bg-blue-900 text-white py-20 md:py-25 px-10 md:px-20"
 		>
 			<div className="max-w-4xl mx-auto text-center">
 				<h2 className="text-4xl font-bold mb-6">About</h2>
