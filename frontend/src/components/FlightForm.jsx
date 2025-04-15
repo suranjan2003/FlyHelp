@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 
-const FlightForm = ({ setResult }) => {
+const FlightForm = ({ setResult, setLoading, setError }) => {
     const [formData, setFormData] = useState({
         FL_DATE: "",
         CRS_DEP_TIME: "",
@@ -16,19 +16,35 @@ const FlightForm = ({ setResult }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("Sending data:", formData); // Debugging log
-    
-        try {
-            const response = await axios.post("http://127.0.0.1:5000/predict", formData, {
-                headers: { "Content-Type": "application/json" }
-            });            
-            console.log("Response:", response.data);
-            setResult(response.data);
-        } catch (error) {
-            console.error("Error fetching prediction:", error);
-        }
+        setLoading(true);
+        setError(false);
+        setResult(null);
+
+        console.log("Sending data:", formData);
+
+        // Simulate a 4 second wait before sending request
+        setTimeout(async () => {
+            try {
+                const response = await axios.post("http://127.0.0.1:5000/predict", formData, {
+                    headers: { "Content-Type": "application/json" }
+                });
+
+                console.log("Response:", response.data);
+
+                if (response.data) {
+                    setResult(response.data);
+                } else {
+                    throw new Error("No result returned");
+                }
+            } catch (error) {
+                console.error("Error fetching prediction:", error);
+                setError(true);
+                setTimeout(() => setError(false), 5000);
+            } finally {
+                setLoading(false);
+            }
+        }, 4000);
     };
-    
 
     return (
         <form onSubmit={handleSubmit} className="space-y-4 p-4 border rounded-lg">
@@ -37,7 +53,15 @@ const FlightForm = ({ setResult }) => {
             <input name="MKT_UNIQUE_CARRIER" placeholder="Flight Carrier Name" onChange={handleChange} required className="w-full p-2 border" />
             <input name="ORIGIN" placeholder="Starting Point" onChange={handleChange} required className="w-full p-2 border" />
             <input name="DEST" placeholder="Destination" onChange={handleChange} required className="w-full p-2 border" />
-            <button type="submit" className="w-full p-2 bg-blue-500 text-white">Predict</button>
+			<div className="flex gap-2 justify-end">
+				<button 
+					onClick={() => window.location.reload()}
+					className="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600 transition cursor-pointer"
+				>
+					Reload
+				</button>
+				<button type="submit" className="px-4 py-2 w-1/2 bg-blue-500 text-white rounded hover:bg-blue-600 transition cursor-pointer">Predict</button>
+			</div>
         </form>
     );
 };
