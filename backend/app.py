@@ -36,16 +36,33 @@ def home():
 
 @app.route("/api/schedule-day", methods=["POST"])
 def schedule_day():
-    data = request.get_json()
-    print("Received data schedule:", data)
-    selected_date = data["FL_DATE"]
-    flights_on_date = flights_df_schedule[flights_df_schedule["FL_DATE"] == selected_date]
+    try:
+        data = request.get_json()
 
-    if flights_on_date.empty:
-        return jsonify({"error": "No flights found for this date"}), 400
+        if not data or "FL_DATE" not in data:
+            return jsonify({"error": "Missing required field: FL_DATE"}), 400
 
-    result_df = run_scheduling(flights_on_date, model, selected_date)
-    return jsonify(result_df.to_dict(orient="records"))
+        selected_date = data["FL_DATE"]
+        print("📅 Received FL_DATE:", selected_date)
+
+        flights_on_date = flights_df_schedule[flights_df_schedule["FL_DATE"] == selected_date]
+
+        if flights_on_date.empty:
+            return jsonify({"error": f"No flights found for the date: {selected_date}"}), 404
+
+        # Run the scheduling logic
+        result_df = run_scheduling(flights_on_date, model, selected_date)
+
+        if result_df.empty:
+            return jsonify({"error": "Scheduling completed, but no results were generated."}), 204
+
+        return jsonify(result_df.to_dict(orient="records"))
+
+    except Exception as e:
+        print("❌ Error in /api/schedule-day:", str(e))
+        print(traceback.format_exc())
+        return jsonify({"error": "An unexpected error occurred during scheduling."}), 500
+
 
 @app.route("/api/predict", methods=["POST"])
 def predict():
