@@ -10,12 +10,13 @@ const Delay_Predictor = () => {
 	return (
 		<div
 			id="delay-predictor"
-			className="min-h-screen flex flex-col items-center pt-20 md:pt-25 px-4 md:px-10 bg-gray-100 "
+			className="min-h-screen flex flex-col items-center pt-20 md:pt-25 px-4 md:px-10 bg-fixed bg-center"
+			style={{ backgroundImage: "url('/services-bg.jpg')"}}
 		>
-			<h1 className="text-4xl font-bold mb-6 text-center">
+			<h1 className="text-4xl text-white font-bold mb-6 text-center">
 				Flight Delay Predictor
 			</h1>
-			<div className="w-full flex flex-col md:flex-row md:justify-center md:gap-10">
+			<div className="w-full flex flex-col md:flex-row md:justify-center md:gap-10 mb-10">
 				<div className="w-full md:w-1/2">
 					<FlightForm
 						setResult={setResult}
@@ -24,7 +25,7 @@ const Delay_Predictor = () => {
 					/>
 				</div>
 
-				<div className="w-full md:w-1/2 border rounded-lg p-4 mt-6 md:mt-0">
+				<div className="w-full min-h-[300px] md:w-1/2 border rounded-lg p-4 mt-6 md:mt-0 bg-gray-100 opacity-90">
 					<h2 className="text-2xl font-semibold mb-4 text-center mb-6 md:mb-10">
 						Prediction Result
 					</h2>
@@ -50,7 +51,7 @@ const Delay_Predictor = () => {
 					) : result ? (
 						<ResultCard result={result} />
 					) : (
-						<div className="text-center text-gray-400">Fill Form & Predict</div>
+						<div className="text-center text-gray-600">Fill Form & Predict</div>
 					)}
 				</div>
 			</div>

@@ -33,7 +33,7 @@ const ScheduleForm = ({ setSchedule, setIsLoading, setShowNoResult }) => {
 	};
 
 	return (
-		<form onSubmit={handleSubmit} className="space-y-4 bg-white p-4 shadow-md w-full max-w-md h-[180px]">
+		<form onSubmit={handleSubmit} className="space-y-4 bg-gray-100 p-4 shadow-md w-full max-w-md h-[180px] opacity-90">
 			<h2 className="text-lg font-bold text-center">Date? to Schedule Flights</h2>
 			<input
 				type="date"

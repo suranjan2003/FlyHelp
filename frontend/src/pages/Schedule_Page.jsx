@@ -11,9 +11,10 @@ const Schedule_Page = () => {
 	return (
 		<div
 			id="scheduling"
-			className="min-h-screen flex flex-col items-center pt-20 md:pt-25 px-4 md:px-10 bg-gray-100"
+			className="min-h-screen flex flex-col items-center pt-20 md:pt-25 px-4 md:px-10 bg-fixed bg-center"
+			style={{ backgroundImage: "url('/services-bg.jpg')"}}
 		>
-			<h2 className="text-4xl font-bold mb-6 text-center">
+			<h2 className="text-4xl text-white font-bold mb-6 text-center">
 				Get Optimized Flight Schedule
 			</h2>
 			<div className="md:flex md:justify-center md:gap-10 w-full flex-col md:flex-row">
@@ -22,7 +23,7 @@ const Schedule_Page = () => {
 					setIsLoading={setIsLoading}
 					setShowNoResult={setShowNoResult}
 				/>
-				<div className="block w-full max-w-4xl h-[400px] md:h-[500px] mt-4 md:mt-0 bg-white overflow-auto">
+				<div className="block w-full max-w-4xl h-[400px] md:h-[500px] mt-4 md:mt-0 bg-gray-100 overflow-auto opacity-90">
 					{isLoading ? (
 						<div className="flex justify-center items-center h-[382px] md:h-[484px] m-2 dashed border-2 border-dashed border-gray-300">
 							<DotLottieReact

@@ -47,7 +47,7 @@ const FlightForm = ({ setResult, setLoading, setError }) => {
     };
 
     return (
-        <form onSubmit={handleSubmit} className="space-y-4 p-4 border rounded-lg">
+        <form onSubmit={handleSubmit} className="space-y-4 p-4 border rounded-lg bg-gray-100 opacity-90">
             <input name="FL_DATE" type="date" onChange={handleChange} required className="w-full p-2 border" />
             <input name="CRS_DEP_TIME" type="time" onChange={handleChange} required className="w-full p-2 border" />
             <input name="MKT_UNIQUE_CARRIER" placeholder="Flight Carrier Name" onChange={handleChange} required className="w-full p-2 border" />
