@@ -22,7 +22,7 @@ flights_df_schedule = pd.read_csv("schedule_flights.csv")
 def home():
     return "Flask Backend is Running!"
 
-@app.route("/schedule-day", methods=["POST"])
+@app.route("/api/schedule-day", methods=["POST"])
 def schedule_day():
     data = request.get_json()
     print("Received data schedule:", data)
@@ -35,7 +35,7 @@ def schedule_day():
     result_df = run_scheduling(flights_on_date, model, selected_date)
     return jsonify(result_df.to_dict(orient="records"))
 
-@app.route("/predict", methods=["POST"])
+@app.route("/api/predict", methods=["POST"])
 def predict():
     data = request.json  # Get JSON request data
     print("Received data:", data)

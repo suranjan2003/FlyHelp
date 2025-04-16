@@ -25,7 +25,7 @@ const FlightForm = ({ setResult, setLoading, setError }) => {
         // Simulate a 4 second wait before sending request
         setTimeout(async () => {
             try {
-                const response = await axios.post("http://127.0.0.1:5000/predict", formData, {
+                const response = await axios.post("http://127.0.0.1:5000/api/predict", formData, {
                     headers: { "Content-Type": "application/json" }
                 });
 
