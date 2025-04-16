@@ -2,11 +2,15 @@ import React, { useState } from "react";
 import FlightForm from "../components/FlightForm";
 import ResultCard from "../components/ResultCard";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
+import ScheduleForm from "../components/ScheduleForm";
+import ScheduleTable from "../components/ScheduleTable";
 
 const Services = () => {
     const [result, setResult] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
+
+	const [schedule, setSchedule] = useState([]);
 
     return (
         <div
@@ -51,6 +55,13 @@ const Services = () => {
                     )}
                 </div>
             </div>
+			<div className="w-full md:w-1/2 mt-6">
+				<h2 className="text-2xl font-semibold mb-4 text-center">Optimized Schedule</h2>
+				<div className="mt-10">
+					<ScheduleForm setSchedule={setSchedule} />
+					<ScheduleTable schedule={schedule} />
+				</div>
+			</div>
         </div>
     );
 };

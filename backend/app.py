@@ -4,6 +4,7 @@ import pickle
 import pandas as pd
 import numpy as np
 from datetime import datetime
+from schedule_engine import run_scheduling
 import traceback
 
 app = Flask(__name__)
@@ -15,10 +16,24 @@ with open("model.pkl", "rb") as file:
 
 # Load flights.csv
 flights_df = pd.read_csv("flights.csv")
+flights_df_schedule = pd.read_csv("schedule_flights.csv")
 
 @app.route("/")
 def home():
     return "Flask Backend is Running!"
+
+@app.route("/schedule-day", methods=["POST"])
+def schedule_day():
+    data = request.get_json()
+    print("Received data schedule:", data)
+    selected_date = data["FL_DATE"]
+    flights_on_date = flights_df_schedule[flights_df_schedule["FL_DATE"] == selected_date]
+
+    if flights_on_date.empty:
+        return jsonify({"error": "No flights found for this date"}), 400
+
+    result_df = run_scheduling(flights_on_date, model, selected_date)
+    return jsonify(result_df.to_dict(orient="records"))
 
 @app.route("/predict", methods=["POST"])
 def predict():
