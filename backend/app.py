@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 import pickle
 import pandas as pd
@@ -6,6 +6,7 @@ import numpy as np
 from datetime import datetime
 from schedule_engine import run_scheduling
 import traceback
+import os
 
 app = Flask(__name__)
 CORS(app)
@@ -17,6 +18,17 @@ with open("model.pkl", "rb") as file:
 # Load flights.csv
 flights_df = pd.read_csv("flights.csv")
 flights_df_schedule = pd.read_csv("schedule_flights.csv")
+
+frontend_folder = os.path.join(os.getcwd(), "..", "frontend",)
+dist_folder = os.path.join(frontend_folder, "dist")
+
+# server static files from the frontend build
+@app.route("/", defaults={"filename": ""})
+@app.route("/<path:filename>")
+def index(filename):
+    if not filename:
+        filename = "index.html"
+    return send_from_directory(dist_folder, filename)
 
 @app.route("/")
 def home():
