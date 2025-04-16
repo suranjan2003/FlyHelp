@@ -152,6 +152,11 @@ def predict():
         print("❌ Error:", str(e))
         print(traceback.format_exc())  # Prints full error stack trace
         return jsonify({"error": str(e)}), 500
+    
+@app.errorhandler(404)
+def not_found(e):
+    return send_from_directory(dist_folder, "index.html")
+
 
 if __name__ == "__main__":
     app.run(debug=True)
