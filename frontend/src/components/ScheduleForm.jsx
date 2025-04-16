@@ -42,9 +42,17 @@ const ScheduleForm = ({ setSchedule, setIsLoading, setShowNoResult }) => {
 				required
 				className="w-full p-2 border rounded"
 			/>
-			<button type="submit" className="w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-700 cursor-pointer transition">
+			<div className="flex gap-2 justify-end">
+			<button 
+					onClick={() => window.location.reload()}
+					className="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600 transition cursor-pointer"
+				>
+					Reload
+				</button>
+			<button type="submit" className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600 cursor-pointer transition">
 				Get Schedule
 			</button>
+			</div>
 		</form>
 	);
 };
