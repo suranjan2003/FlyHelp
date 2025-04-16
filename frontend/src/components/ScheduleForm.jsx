@@ -13,7 +13,10 @@ const ScheduleForm = ({ setSchedule, setIsLoading, setShowNoResult }) => {
 
 		setTimeout(async () =>{
 		try {
-			const response = await axios.post(BASE_URL + "/schedule-day", { FL_DATE: date });
+			const response = await axios.post(BASE_URL + "/schedule-day", { FL_DATE: date }, {
+				headers: { "Content-Type": "application/json" }
+			});
+			
 			const data = response.data;
 
 			console.log("Response:", data);
