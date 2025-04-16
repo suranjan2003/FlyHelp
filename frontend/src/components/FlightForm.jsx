@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import { BASE_URL } from "../App";
 
 const FlightForm = ({ setResult, setLoading, setError }) => {
     const [formData, setFormData] = useState({
@@ -25,7 +26,7 @@ const FlightForm = ({ setResult, setLoading, setError }) => {
         // Simulate a 4 second wait before sending request
         setTimeout(async () => {
             try {
-                const response = await axios.post("http://127.0.0.1:5000/api/predict", formData, {
+                const response = await axios.post(BASE_URL + "/predict", formData, {
                     headers: { "Content-Type": "application/json" }
                 });
 

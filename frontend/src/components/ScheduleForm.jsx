@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import { BASE_URL } from "../App";
 
 const ScheduleForm = ({ setSchedule, setIsLoading, setShowNoResult }) => {
 	const [date, setDate] = useState("");
@@ -12,7 +13,7 @@ const ScheduleForm = ({ setSchedule, setIsLoading, setShowNoResult }) => {
 
 		setTimeout(async () =>{
 		try {
-			const response = await axios.post("http://127.0.0.1:5000/api/schedule-day", { FL_DATE: date });
+			const response = await axios.post(BASE_URL + "/schedule-day", { FL_DATE: date });
 			const data = response.data;
 
 			console.log("Response:", data);
